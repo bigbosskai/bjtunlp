@@ -9,7 +9,7 @@
  ## 安装
 
 ```bash
-pip install hanlp
+pip install bjtunlp
 python setup.py install
 ```
 
