@@ -1,7 +1,9 @@
 # bjtunlp: Beijing Jiaotong University Natural Language Processing
 
-面向生产环境的多语种自然语言处理工具包，基于最新预训练语言模型Electra，目标是普及落地最前沿的NLP技术。
-bjtunlp具备功能完善、性能高效、架构清晰、语料时新、可自定义的特点。
+基于预训练语言模型Electra实现的汉语自然语言处理工具。目前支持汉语分词、词性标注、与依存句法分析。
+目前主流自然语言处理工具采用Pipeline的方式，即先分词再词性标注最后进行依存句法分析，
+存在错误传播问题，而本工具采用了联合学习的方式(非multi tasks)将这三个任务统一在基于图的分析方法框架下。
+实验结果表明性能较Pipeline的方式有明显提升。
 
 
  ## 安装
