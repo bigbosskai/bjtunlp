@@ -34,23 +34,28 @@ def main():
                         default=r'output')
     parser.add_argument('--dataset', type=str,
                         help=r'The data set required for training the joint model, which must include the training set, test set and development set, and the data format is CoNLL format. default:./ctb7',
-                        default=r'G:\真正联合\bjtunlp\data\ctb5')
+                        default=r'G:\真正联合\bjtunlp\data\ctb7')
     parser.add_argument('--pretraining', type=str,
                         help='Pre-trained language models Electra downloaded from huggingface. default:./discriminator',
                         default=r'H:\预训练语言模型\哈工大20G语料-Electra\base\discriminator')
     parser.add_argument('--epochs', type=int, help='Number of epoch to train the model. default:15', default=15)
     parser.add_argument('--lr', type=float, help='Learning rate setting. default:2e-5', default=2e-5)
-    parser.add_argument('--batch_size', type=int, help='The number of words fed to the model at a time. default:1000', default=1000)
-    parser.add_argument('--clip', type=float, help='Value for gradient clipping nn.utils.clip_grad_value_. default:5.0', default=5.0)
+    parser.add_argument('--batch_size', type=int, help='The number of words fed to the model at a time. default:1000',
+                        default=1000)
+    parser.add_argument('--clip', type=float, help='Value for gradient clipping nn.utils.clip_grad_value_. default:5.0',
+                        default=5.0)
     parser.add_argument('--weight_decay', type=float, help='L2 regularization. default:1e-2',
                         default=1e-2)
-    parser.add_argument('--device', type=int, help='Whether to use GPU for training, 0 means cuda:0, -1 means cpu. default:0',
+    parser.add_argument('--device', type=int,
+                        help='Whether to use GPU for training, 0 means cuda:0, -1 means cpu. default:0',
                         default=0)
     parser.add_argument('--dropout', type=float, help='dropout. default:0.5', default=0.5)
-    parser.add_argument('--arc_mlp_size', type=int, help='The hidden dimensions of predicting the dependency arc. default:500',
+    parser.add_argument('--arc_mlp_size', type=int,
+                        help='The hidden dimensions of predicting the dependency arc. default:500',
                         default=500)
-    parser.add_argument('--label_mlp_size', type=int, help='The hidden dimensions of predicting the dependency label. default:100',
-                        default=100)
+    parser.add_argument('--label_mlp_size', type=int,
+                        help='The hidden dimensions of predicting the dependency label. default:100',
+                        default=300)
     args = parser.parse_args()
     print(args)
     context_path = os.getcwd()

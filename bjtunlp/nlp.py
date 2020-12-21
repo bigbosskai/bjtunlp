@@ -44,7 +44,7 @@ class BJTUNLP(object):
         for tokens, pos_seq in zip(res[0], res[1]):
             sent = []
             for tok, pos in zip(tokens, pos_seq):
-                sent.append(tok + '_' + pos)
+                sent.append(tok + '/' + pos)
             ret.append(sent)
         return ret
 

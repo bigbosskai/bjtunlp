@@ -57,12 +57,11 @@ class ElectraEmbedding(nn.Module):
 
 
 
-    def forward(self, input_tokens: List[List[str]]):
+    def forward(self, input_tokens):
         """
-        这里的input_ids不是BERT的index表示，应为仿照fastNLP的做法，其内部作了两个词表之间的映射关系
-        [['上', '海', '浦', '东', '开', '发', '与', '法', '制', '建', '设', '同', '步'],
-        ['青', '岛', '未', '发', '现', '新', '增', '阳', '性']]
-        :return: the last layer of Electra model, the shape is [batch_size, input_tokens_max_len, hidden_size]
+        传入的使tensor 内部会根据词表将用户构建的词表，与预训练语言模型的词表做一个映射
+        :param input_tokens:
+        :return:
         """
         shape = input_tokens.size()
         input_tokens = input_tokens.tolist()
