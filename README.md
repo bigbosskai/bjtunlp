@@ -1,9 +1,7 @@
 # bjtunlp: Beijing Jiaotong University Natural Language Processing
 
-基于预训练语言模型Electra实现的汉语自然语言处理工具。目前支持汉语分词、词性标注、与依存句法分析。
-目前主流自然语言处理工具采用Pipeline的方式，即先分词再词性标注最后进行依存句法分析，
-存在错误传播问题，而本工具采用了联合学习的方式(非multi tasks)将这三个任务统一在基于图的分析方法框架下。
-实验结果表明性能较Pipeline的方式有明显提升。
+面向生产环境的多语种自然语言处理工具包，基于最新预训练语言模型Electra，目标是普及落地最前沿的NLP技术。
+bjtunlp具备功能完善、性能高效、架构清晰、语料时新、可自定义的特点。
 
 
  ## 安装
@@ -16,37 +14,40 @@ python setup.py install
 要求Python 3.7以上，支持Windows，可以在CPU上运行，推荐GPU。
 
 ## 快速上手
+### 模型下载
+链接：https://pan.baidu.com/s/1MY7i9UdlGWd_NVT8Nh9WmA 
+提取码：6nwz 
 
 ### 中文分词
 
-第一步需要从磁盘或网络加载模型文件。比如，此处加载一个名为 `joint.model` 的模型。
+第一步需要从磁盘或网络加载模型文件。比如，此处加载一个名为 `model.bin` 的模型。
 
 ```python
 >>> from bjtunlp import BJTUNLP
->>> nlp = BJTUNLP('joint.model')
+>>> nlp = BJTUNLP('path_to_model/model.bin')
 >>> print(nlp.seg(['中国进出口银行与中国银行加强合作']))
-[['中国','进出口','银行','与','中国','银行','加强','合作']]
+[['中国', '进出口', '银行', '与', '中国', '银行', '加强', '合作']]
 ```
 ### 中文词性标注
 ```python
 >>> from bjtunlp import BJTUNLP
->>> nlp = BJTUNLP('joint.model')
+>>> nlp = BJTUNLP('path_to_model/model.bin')
 >>> print(nlp.pos(['中国进出口银行与中国银行加强合作']))
-[['中国_NR','进出口_NN','银行_NN','与_CC','中国_NR','银行_NN','加强_VV','合作_NN']]
+[['中国/NR', '进出口/NN', '银行/NN', '与/CC', '中国/NR', '银行/NN', '加强/VV', '合作/NN']]
 ```
 
 ### 中文依存句法分析
 输出是 CoNLL-X 格式[^conllx]的句法树。
 ```python
 >>> from bjtunlp import BJTUNLP
->>> nlp = BJTUNLP('joint.model')
+>>> nlp = BJTUNLP('path_to_model/model.bin')
 >>> print(nlp.dep(['中国进出口银行与中国银行加强合作']))
-1	中国	_	NR	_	_	3	NMOD	_	_
-2	进出口	_	NN	_	_	3	MMOD	_	_
-3	银行	_	NN	_	_	7	SBJ	_	_
-4	与	_	CC	_	_	3	CJTN	_	_
-5	中国	_	NR	_	_	6	NMOD	_	_
-6	银行	_	NN	_	_	4	CJT	_	_
-7	加强	_	VV	_	_	0	ROOT	_	_
-8	合作	_	NN	_	_	7	COMP	_	_
+1	中国	_	NR	_	_	3	nn	_	_
+2	进出口	_	NN	_	_	3	nn	_	_
+3	银行	_	NN	_	_	6	conj	_	_
+4	与	_	CC	_	_	6	cc	_	_
+5	中国	_	NR	_	_	6	nn	_	_
+6	银行	_	NN	_	_	7	nsubj	_	_
+7	加强	_	VV	_	_	0	root	_	_
+8	合作	_	NN	_	_	7	dobj	_	_
 ```
